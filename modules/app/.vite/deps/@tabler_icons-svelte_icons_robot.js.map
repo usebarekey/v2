@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/robot.svelte"],
+  "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4\" }], [\"path\", { \"d\": \"M12 2v2\" }], [\"path\", { \"d\": \"M9 12v9\" }], [\"path\", { \"d\": \"M15 12v9\" }], [\"path\", { \"d\": \"M5 16l4 -2\" }], [\"path\", { \"d\": \"M15 14l4 2\" }], [\"path\", { \"d\": \"M9 18h6\" }], [\"path\", { \"d\": \"M10 8v.01\" }], [\"path\", { \"d\": \"M14 8v.01\" }]];\n</script>\n<Icon type=\"outline\" name=\"robot\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;kCAAA;;;;QACM,WAAQ;;MAAK;;QAAU,KAAK;;;KAAoF,QAAM,EAAI,KAAK,UAAS,CAAA;KAAM,QAAM,EAAI,KAAK,UAAS,CAAA;KAAM,QAAM,EAAI,KAAK,WAAU,CAAA;KAAM,QAAM,EAAI,KAAK,aAAY,CAAA;KAAM,QAAM,EAAI,KAAK,aAAY,CAAA;KAAM,QAAM,EAAI,KAAK,UAAS,CAAA;KAAM,QAAM,EAAI,KAAK,YAAW,CAAA;KAAM,QAAM,EAAI,KAAK,YAAW,CAAA;;;;;;UAE1W,aAAI,MAAA,aAAA,EAAA,MAAA,WAAA,MAAA,QAAA,GAAA,MAAA,mBAAA;;eAAoD;;;;;;;;;;;;;;;;;;AADjD;;;;;;;;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/arrow-up-right.svelte"],
+  "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M17 7l-10 10\" }], [\"path\", { \"d\": \"M8 7l9 0l0 9\" }]];\n</script>\n<Icon type=\"outline\" name=\"arrow-up-right\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2CAAA;;;;QACM,WAAQ;KAAK,QAAM,EAAI,KAAK,eAAc,CAAA;KAAM,QAAM,EAAI,KAAK,eAAc,CAAA;;;;;;UAElF,aAAI,MAAA,aAAA,EAAA,MAAA,WAAA,MAAA,iBAAA,GAAA,MAAA,mBAAA;;eAA6D;;;;;;;;;;;;;;;;;;AAD1D;;;;;;;;",
+  "names": []
+}
