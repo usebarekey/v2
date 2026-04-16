@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/braces.svelte"],
-  "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M7 4a2 2 0 0 0 -2 2v3a2 3 0 0 1 -2 3a2 3 0 0 1 2 3v3a2 2 0 0 0 2 2\" }], [\"path\", { \"d\": \"M17 4a2 2 0 0 1 2 2v3a2 3 0 0 0 2 3a2 3 0 0 0 -2 3v3a2 2 0 0 1 -2 2\" }]];\n</script>\n<Icon type=\"outline\" name=\"braces\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mCAAA;;;;QACM,WAAQ;;MAAK;;QAAU,KAAK;;;;MAA0E;;QAAU,KAAK;;;;;;;;UAE1H,aAAI,MAAA,aAAA,EAAA,MAAA,WAAA,MAAA,SAAA,GAAA,MAAA,mBAAA;;eAAqD;;;;;;;;;;;;;;;;;;AADlD;;;;;;;;",
-  "names": []
-}

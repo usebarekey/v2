@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/lock-filled.svelte"],
-  "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3v-3a5 5 0 0 1 5 -5m0 12a2 2 0 0 0 -1.995 1.85l-.005 .15a2 2 0 1 0 2 -2m0 -10a3 3 0 0 0 -3 3v3h6v-3a3 3 0 0 0 -3 -3\" }]];\n</script>\n<Icon type=\"filled\" name=\"lock-filled\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;wCAAA;;;;QACM,WAAQ;;MAAK;;QAAU,KAAK;;;;;;;;UAEjC,aAAI,MAAA,aAAA,EAAA,MAAA,UAAA,MAAA,cAAA,GAAA,MAAA,mBAAA;;eAAyD;;;;;;;;;;;;;;;;;;AADtD;;;;;;;;",
-  "names": []
-}

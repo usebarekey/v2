@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/layout-sidebar-right-filled.svelte"],
-  "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M6 21a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3zm8 -16h-8a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h8z\" }]];\n</script>\n<Icon type=\"filled\" name=\"layout-sidebar-right-filled\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;wDAAA;;;;QACM,WAAQ;;MAAK;;QAAU,KAAK;;;;;;;;UAEjC,aAAI,MAAA,aAAA,EAAA,MAAA,UAAA,MAAA,8BAAA,GAAA,MAAA,mBAAA;;eAAyE;;;;;;;;;;;;;;;;;;AADtE;;;;;;;;",
-  "names": []
-}
