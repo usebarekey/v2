@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "@fontsource/jetbrains-mono";
   import dither from "$lib/assets/dither.png";
   import "$lib/styles/layout.css";
   import "$lib/styles/fonts.css";

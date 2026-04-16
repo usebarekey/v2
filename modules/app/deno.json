@@ -9,6 +9,8 @@
     "check:watch": "deno run -A npm:@sveltejs/kit sync && deno run -A npm:svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "imports": {
+    "@fontsource/jetbrains-mono": "npm:@fontsource/jetbrains-mono@5.2.8",
+    "@fontsource/jetbrains-mono/": "npm:@fontsource/jetbrains-mono@5.2.8/",
     "@fontsource-variable/geist": "npm:@fontsource-variable/geist@5.2.8",
     "@fontsource-variable/geist/": "npm:@fontsource-variable/geist@5.2.8/",
     "@internationalized/date": "npm:@internationalized/date@3.12.0",
@@ -49,6 +51,7 @@
     "paneforge": "npm:paneforge@1.0.2",
     "paneforge/": "npm:paneforge@1.0.2/",
     "svelte": "npm:svelte@5.54.0",
+    "svelte-effect-runtime": "npm:svelte-effect-runtime@^1.0.4",
     "svelte/": "npm:svelte@5.54.0/",
     "svelte-check": "npm:svelte-check@4.4.2",
     "svelte-check/": "npm:svelte-check@4.4.2/",
