@@ -5,7 +5,12 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import {} from "../shader-sizing.js";
-import { declarePI, rotation2, simplexNoise, colorBandingFix } from "../shader-utils.js";
+import {
+  colorBandingFix,
+  declarePI,
+  rotation2,
+  simplexNoise,
+} from "../shader-utils.js";
 const liquidMetalFragmentShader = `#version 300 es
 precision mediump float;
 
@@ -333,7 +338,7 @@ const POISSON_CONFIG_OPTIMIZED = {
   // Set to true to see performance metrics
   workingSize: 512,
   // Size to solve Poisson at (will upscale to original size)
-  iterations: 40
+  iterations: 40,
   // SOR converges ~2-20x faster than standard Gauss-Seidel
 };
 function toProcessedLiquidMetal(file) {
@@ -345,7 +350,8 @@ function toProcessedLiquidMetal(file) {
       reject(new Error("Invalid file or canvas context"));
       return;
     }
-    const blobContentTypePromise = isBlob && fetch(file).then((res) => res.headers.get("Content-Type"));
+    const blobContentTypePromise = isBlob &&
+      fetch(file).then((res) => res.headers.get("Content-Type"));
     const img = new Image();
     img.crossOrigin = "anonymous";
     const totalStartTime = performance.now();
@@ -382,9 +388,15 @@ function toProcessedLiquidMetal(file) {
       if (POISSON_CONFIG_OPTIMIZED.measurePerformance) {
         console.log(`[Processing Mode]`);
         console.log(`  Original: ${originalWidth}\xD7${originalHeight}`);
-        console.log(`  Working: ${width}\xD7${height} (${(scaleFactor * 100).toFixed(1)}% scale)`);
+        console.log(
+          `  Working: ${width}\xD7${height} (${
+            (scaleFactor * 100).toFixed(1)
+          }% scale)`,
+        );
         if (scaleFactor < 1) {
-          console.log(`  Speedup: ~${Math.round(1 / (scaleFactor * scaleFactor))}\xD7`);
+          console.log(
+            `  Speedup: ~${Math.round(1 / (scaleFactor * scaleFactor))}\xD7`,
+          );
         }
       }
       canvas.width = originalWidth;
@@ -417,13 +429,13 @@ function toProcessedLiquidMetal(file) {
             isBoundary = true;
           } else {
             isBoundary = !shapeMask[idx - 1] || // left
-            !shapeMask[idx + 1] || // right
-            !shapeMask[idx - width] || // top
-            !shapeMask[idx + width] || // bottom
-            !shapeMask[idx - width - 1] || // top-left
-            !shapeMask[idx - width + 1] || // top-right
-            !shapeMask[idx + width - 1] || // bottom-left
-            !shapeMask[idx + width + 1];
+              !shapeMask[idx + 1] || // right
+              !shapeMask[idx - width] || // top
+              !shapeMask[idx + width] || // bottom
+              !shapeMask[idx - width - 1] || // top-left
+              !shapeMask[idx - width + 1] || // top-right
+              !shapeMask[idx + width - 1] || // bottom-left
+              !shapeMask[idx + width + 1];
           }
           if (isBoundary) {
             boundaryMask[idx] = 1;
@@ -434,9 +446,15 @@ function toProcessedLiquidMetal(file) {
         }
       }
       if (POISSON_CONFIG_OPTIMIZED.measurePerformance) {
-        console.log(`[Mask Building] Time: ${(performance.now() - startMask).toFixed(2)}ms`);
         console.log(
-          `  Shape pixels: ${shapePixelCount} / ${width * height} (${(shapePixelCount / (width * height) * 100).toFixed(1)}%)`
+          `[Mask Building] Time: ${
+            (performance.now() - startMask).toFixed(2)
+          }ms`,
+        );
+        console.log(
+          `  Shape pixels: ${shapePixelCount} / ${width * height} (${
+            (shapePixelCount / (width * height) * 100).toFixed(1)
+          }%)`,
         );
         console.log(`  Interior pixels: ${interiorIndices.length}`);
         console.log(`  Boundary pixels: ${boundaryIndices.length}`);
@@ -447,12 +465,22 @@ function toProcessedLiquidMetal(file) {
         new Uint32Array(interiorIndices),
         new Uint32Array(boundaryIndices),
         width,
-        height
+        height,
       );
       const startSolve = performance.now();
-      const u = solvePoissonSparse(sparseData, shapeMask, boundaryMask, width, height);
+      const u = solvePoissonSparse(
+        sparseData,
+        shapeMask,
+        boundaryMask,
+        width,
+        height,
+      );
       if (POISSON_CONFIG_OPTIMIZED.measurePerformance) {
-        console.log(`[Poisson Solve] Time: ${(performance.now() - startSolve).toFixed(2)}ms`);
+        console.log(
+          `[Poisson Solve] Time: ${
+            (performance.now() - startSolve).toFixed(2)
+          }ms`,
+        );
       }
       let maxVal = 0;
       let finalImageData;
@@ -487,14 +515,29 @@ function toProcessedLiquidMetal(file) {
       tempCtx.putImageData(tempImg, 0, 0);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(tempCanvas, 0, 0, width, height, 0, 0, originalWidth, originalHeight);
+      ctx.drawImage(
+        tempCanvas,
+        0,
+        0,
+        width,
+        height,
+        0,
+        0,
+        originalWidth,
+        originalHeight,
+      );
       const outImg = ctx.getImageData(0, 0, originalWidth, originalHeight);
       const originalCanvas = document.createElement("canvas");
       originalCanvas.width = originalWidth;
       originalCanvas.height = originalHeight;
       const originalCtx = originalCanvas.getContext("2d");
       originalCtx.drawImage(img, 0, 0, originalWidth, originalHeight);
-      const originalData = originalCtx.getImageData(0, 0, originalWidth, originalHeight);
+      const originalData = originalCtx.getImageData(
+        0,
+        0,
+        originalWidth,
+        originalHeight,
+      );
       for (let i = 0; i < outImg.data.length; i += 4) {
         const a = originalData.data[i + 3];
         const upscaledAlpha = outImg.data[i + 3];
@@ -519,16 +562,23 @@ function toProcessedLiquidMetal(file) {
           const totalTime = performance.now() - totalStartTime;
           console.log(`[Total Processing Time] ${totalTime.toFixed(2)}ms`);
           if (scaleFactor < 1) {
-            const estimatedFullResTime = totalTime * Math.pow(originalWidth * originalHeight / (width * height), 1.5);
-            console.log(`[Estimated time at full resolution] ~${estimatedFullResTime.toFixed(0)}ms`);
+            const estimatedFullResTime = totalTime *
+              Math.pow(originalWidth * originalHeight / (width * height), 1.5);
             console.log(
-              `[Time saved] ~${(estimatedFullResTime - totalTime).toFixed(0)}ms (${Math.round(estimatedFullResTime / totalTime)}\xD7 faster)`
+              `[Estimated time at full resolution] ~${
+                estimatedFullResTime.toFixed(0)
+              }ms`,
+            );
+            console.log(
+              `[Time saved] ~${
+                (estimatedFullResTime - totalTime).toFixed(0)
+              }ms (${Math.round(estimatedFullResTime / totalTime)}\xD7 faster)`,
             );
           }
         }
         resolve({
           imageData: finalImageData,
-          pngBlob: blob
+          pngBlob: blob,
         });
       }, "image/png");
     };
@@ -536,26 +586,45 @@ function toProcessedLiquidMetal(file) {
     img.src = typeof file === "string" ? file : URL.createObjectURL(file);
   });
 }
-function buildSparseData(shapeMask, boundaryMask, interiorPixels, boundaryPixels, width, height) {
+function buildSparseData(
+  shapeMask,
+  boundaryMask,
+  interiorPixels,
+  boundaryPixels,
+  width,
+  height,
+) {
   const pixelCount = interiorPixels.length;
   const neighborIndices = new Int32Array(pixelCount * 4);
   for (let i = 0; i < pixelCount; i++) {
     const idx = interiorPixels[i];
     const x = idx % width;
     const y = Math.floor(idx / width);
-    neighborIndices[i * 4 + 0] = x < width - 1 && shapeMask[idx + 1] ? idx + 1 : -1;
+    neighborIndices[i * 4 + 0] = x < width - 1 && shapeMask[idx + 1]
+      ? idx + 1
+      : -1;
     neighborIndices[i * 4 + 1] = x > 0 && shapeMask[idx - 1] ? idx - 1 : -1;
-    neighborIndices[i * 4 + 2] = y > 0 && shapeMask[idx - width] ? idx - width : -1;
-    neighborIndices[i * 4 + 3] = y < height - 1 && shapeMask[idx + width] ? idx + width : -1;
+    neighborIndices[i * 4 + 2] = y > 0 && shapeMask[idx - width]
+      ? idx - width
+      : -1;
+    neighborIndices[i * 4 + 3] = y < height - 1 && shapeMask[idx + width]
+      ? idx + width
+      : -1;
   }
   return {
     interiorPixels,
     boundaryPixels,
     pixelCount,
-    neighborIndices
+    neighborIndices,
   };
 }
-function solvePoissonSparse(sparseData, shapeMask, boundaryMask, width, height) {
+function solvePoissonSparse(
+  sparseData,
+  shapeMask,
+  boundaryMask,
+  width,
+  height,
+) {
   const ITERATIONS = POISSON_CONFIG_OPTIMIZED.iterations;
   const C = 0.01;
   const u = new Float32Array(width * height);
@@ -611,7 +680,11 @@ function solvePoissonSparse(sparseData, shapeMask, boundaryMask, width, height) 
     console.log(`  Iterations: ${ITERATIONS}`);
     console.log(`  Time: ${elapsed.toFixed(2)}ms`);
     console.log(`  Interior pixels processed: ${pixelCount}`);
-    console.log(`  Speed: ${(ITERATIONS * pixelCount / (elapsed * 1e3)).toFixed(2)} Mpixels/sec`);
+    console.log(
+      `  Speed: ${
+        (ITERATIONS * pixelCount / (elapsed * 1e3)).toFixed(2)
+      } Mpixels/sec`,
+    );
   }
   return u;
 }
@@ -620,12 +693,12 @@ const LiquidMetalShapes = {
   circle: 1,
   daisy: 2,
   diamond: 3,
-  metaballs: 4
+  metaballs: 4,
 };
 export {
+  liquidMetalFragmentShader,
   LiquidMetalShapes,
   POISSON_CONFIG_OPTIMIZED,
-  liquidMetalFragmentShader,
-  toProcessedLiquidMetal
+  toProcessedLiquidMetal,
 };
 //# sourceMappingURL=liquid-metal.js.map

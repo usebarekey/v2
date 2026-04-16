@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../../node_modules/.deno/@tabler+icons-svelte@3.41.0/node_modules/@tabler/icons-svelte/dist/icons/chevron-right.svelte"],
   "sourcesContent": ["<script>import Icon from '../Icon.svelte';\nconst iconNode = [[\"path\", { \"d\": \"M9 6l6 6l-6 6\" }]];\n</script>\n<Icon type=\"outline\" name=\"chevron-right\" {...$$props} iconNode={iconNode}>\n  <slot/>\n</Icon>\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0CAAA;;;;QACM,WAAQ,CAAA,CAAK,QAAM,EAAI,KAAK,gBAAe,CAAA,CAAA;;;;;UAEhD,aAAI,MAAA,aAAA,EAAA,MAAA,WAAA,MAAA,gBAAA,GAAA,MAAA,mBAAA;;eAA4D;;;;;;;;;;;;;;;;;;AADzD;;;;;;;;",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0CAAA;;;;QACM,WAAQ,CAAA,CAAK,QAAM,EAAI,KAAK,gBAAe,CAAA,CAAA;;;;;UAEhD,aAAI,MAAA,aAAA,EAAA,MAAA,WAAA,MAAA,gBAAA,GAAA,MAAA,mBAAA;;eAA4D;;;;;;;;;;;;;;;;;;AADzD;;;;;;;;",
   "names": []
 }

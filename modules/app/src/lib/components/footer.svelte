@@ -57,6 +57,15 @@
                             )}
                         </div>
                     </div>
+
+                                        <div class="flex flex-col gap-2">
+                        <span class="text-sm font-medium font-kh-interference"
+                            >Open Source</span
+                        >
+                        <div class="flex flex-col gap-1">
+                            {@render link("svelte-effect-runtime", "https://github.com/usebarekey/svelte-effect-runtime")}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex items-end justify-end">

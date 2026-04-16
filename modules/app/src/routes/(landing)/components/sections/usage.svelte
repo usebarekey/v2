@@ -12,7 +12,7 @@
         <span class="text-muted-foreground">Many, apparently.</span>
         <div class="h-12 w-px bg-foreground/5"></div>
 
-        {#snippet card(title: string, value: string)}
+        {#snippet card(title, value)}
             <div class="flex flex-col">
                 <span class="text-4xl font-kh-interference">{value}</span>
                 <span class="font-kh-interference text-muted-foreground text-sm"

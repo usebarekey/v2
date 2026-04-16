@@ -40,7 +40,17 @@ class ShaderMount {
   uniformCache = {};
   textureUnitMap = /* @__PURE__ */ new Map();
   ownerDocument;
-  constructor(parentElement, fragmentShader, uniforms, webGlContextAttributes, speed = 0, frame = 0, minPixelRatio = 2, maxPixelCount = DEFAULT_MAX_PIXEL_COUNT, mipmaps = []) {
+  constructor(
+    parentElement,
+    fragmentShader,
+    uniforms,
+    webGlContextAttributes,
+    speed = 0,
+    frame = 0,
+    minPixelRatio = 2,
+    maxPixelCount = DEFAULT_MAX_PIXEL_COUNT,
+    mipmaps = [],
+  ) {
     if (parentElement?.nodeType === 1) {
       this.parentElement = parentElement;
     } else {
@@ -76,33 +86,57 @@ class ShaderMount {
     this.setSpeed(speed);
     this.parentElement.setAttribute("data-paper-shader", "");
     this.parentElement.paperShaderMount = this;
-    this.ownerDocument.addEventListener("visibilitychange", this.handleDocumentVisibilityChange);
+    this.ownerDocument.addEventListener(
+      "visibilitychange",
+      this.handleDocumentVisibilityChange,
+    );
   }
   initProgram = () => {
-    const program = createProgram(this.gl, vertexShaderSource, this.fragmentShader);
+    const program = createProgram(
+      this.gl,
+      vertexShaderSource,
+      this.fragmentShader,
+    );
     if (!program) return;
     this.program = program;
   };
   setupPositionAttribute = () => {
-    const positionAttributeLocation = this.gl.getAttribLocation(this.program, "a_position");
+    const positionAttributeLocation = this.gl.getAttribLocation(
+      this.program,
+      "a_position",
+    );
     const positionBuffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
     const positions = [-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1];
-    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
+    this.gl.bufferData(
+      this.gl.ARRAY_BUFFER,
+      new Float32Array(positions),
+      this.gl.STATIC_DRAW,
+    );
     this.gl.enableVertexAttribArray(positionAttributeLocation);
-    this.gl.vertexAttribPointer(positionAttributeLocation, 2, this.gl.FLOAT, false, 0, 0);
+    this.gl.vertexAttribPointer(
+      positionAttributeLocation,
+      2,
+      this.gl.FLOAT,
+      false,
+      0,
+      0,
+    );
   };
   setupUniforms = () => {
     const uniformLocations = {
       u_time: this.gl.getUniformLocation(this.program, "u_time"),
       u_pixelRatio: this.gl.getUniformLocation(this.program, "u_pixelRatio"),
-      u_resolution: this.gl.getUniformLocation(this.program, "u_resolution")
+      u_resolution: this.gl.getUniformLocation(this.program, "u_resolution"),
     };
     Object.entries(this.providedUniforms).forEach(([key, value]) => {
       uniformLocations[key] = this.gl.getUniformLocation(this.program, key);
       if (value instanceof HTMLImageElement) {
         const aspectRatioUniformName = `${key}AspectRatio`;
-        uniformLocations[aspectRatioUniformName] = this.gl.getUniformLocation(this.program, aspectRatioUniformName);
+        uniformLocations[aspectRatioUniformName] = this.gl.getUniformLocation(
+          this.program,
+          aspectRatioUniformName,
+        );
       }
     });
     this.uniformLocations = uniformLocations;
@@ -154,8 +188,10 @@ class ShaderMount {
     const pinchZoom = visualViewport?.scale ?? 1;
     if (this.devicePixelsSupported) {
       const scaleToMeetMinPixelRatio = Math.max(1, this.minPixelRatio / dpr);
-      targetPixelWidth = this.parentDevicePixelWidth * scaleToMeetMinPixelRatio * pinchZoom;
-      targetPixelHeight = this.parentDevicePixelHeight * scaleToMeetMinPixelRatio * pinchZoom;
+      targetPixelWidth = this.parentDevicePixelWidth *
+        scaleToMeetMinPixelRatio * pinchZoom;
+      targetPixelHeight = this.parentDevicePixelHeight *
+        scaleToMeetMinPixelRatio * pinchZoom;
     } else {
       let targetRenderScale = Math.max(dpr, this.minPixelRatio) * pinchZoom;
       if (this.isSafari) {
@@ -165,12 +201,17 @@ class ShaderMount {
       targetPixelWidth = Math.round(this.parentWidth) * targetRenderScale;
       targetPixelHeight = Math.round(this.parentHeight) * targetRenderScale;
     }
-    const maxPixelCountHeadroom = Math.sqrt(this.maxPixelCount) / Math.sqrt(targetPixelWidth * targetPixelHeight);
+    const maxPixelCountHeadroom = Math.sqrt(this.maxPixelCount) /
+      Math.sqrt(targetPixelWidth * targetPixelHeight);
     const scaleToMeetMaxPixelCount = Math.min(1, maxPixelCountHeadroom);
     const newWidth = Math.round(targetPixelWidth * scaleToMeetMaxPixelCount);
     const newHeight = Math.round(targetPixelHeight * scaleToMeetMaxPixelCount);
     const newRenderScale = newWidth / Math.round(this.parentWidth);
-    if (this.canvasElement.width !== newWidth || this.canvasElement.height !== newHeight || this.renderScale !== newRenderScale) {
+    if (
+      this.canvasElement.width !== newWidth ||
+      this.canvasElement.height !== newHeight ||
+      this.renderScale !== newRenderScale
+    ) {
       this.renderScale = newRenderScale;
       this.canvasElement.width = newWidth;
       this.canvasElement.height = newHeight;
@@ -194,7 +235,11 @@ class ShaderMount {
     this.gl.useProgram(this.program);
     this.gl.uniform1f(this.uniformLocations.u_time, this.currentFrame * 1e-3);
     if (this.resolutionChanged) {
-      this.gl.uniform2f(this.uniformLocations.u_resolution, this.gl.canvas.width, this.gl.canvas.height);
+      this.gl.uniform2f(
+        this.uniformLocations.u_resolution,
+        this.gl.canvas.width,
+        this.gl.canvas.height,
+      );
       this.gl.uniform1f(this.uniformLocations.u_pixelRatio, this.renderScale);
       this.resolutionChanged = false;
     }
@@ -214,7 +259,9 @@ class ShaderMount {
   /** Creates a texture from an image and sets it into a uniform value */
   setTextureUniform = (uniformName, image) => {
     if (!image.complete || image.naturalWidth === 0) {
-      throw new Error(`Paper Shaders: image for uniform ${uniformName} must be fully loaded`);
+      throw new Error(
+        `Paper Shaders: image for uniform ${uniformName} must be fully loaded`,
+      );
     }
     const existingTexture = this.textures.get(uniformName);
     if (existingTexture) {
@@ -227,18 +274,48 @@ class ShaderMount {
     this.gl.activeTexture(this.gl.TEXTURE0 + textureUnit);
     const texture = this.gl.createTexture();
     this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
-    this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_S,
+      this.gl.CLAMP_TO_EDGE,
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_T,
+      this.gl.CLAMP_TO_EDGE,
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MIN_FILTER,
+      this.gl.LINEAR,
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MAG_FILTER,
+      this.gl.LINEAR,
+    );
+    this.gl.texImage2D(
+      this.gl.TEXTURE_2D,
+      0,
+      this.gl.RGBA,
+      this.gl.RGBA,
+      this.gl.UNSIGNED_BYTE,
+      image,
+    );
     if (this.mipmaps.includes(uniformName)) {
       this.gl.generateMipmap(this.gl.TEXTURE_2D);
-      this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR_MIPMAP_LINEAR);
+      this.gl.texParameteri(
+        this.gl.TEXTURE_2D,
+        this.gl.TEXTURE_MIN_FILTER,
+        this.gl.LINEAR_MIPMAP_LINEAR,
+      );
     }
     const error = this.gl.getError();
     if (error !== this.gl.NO_ERROR || texture === null) {
-      console.error("Paper Shaders: WebGL error when uploading texture:", error);
+      console.error(
+        "Paper Shaders: WebGL error when uploading texture:",
+        error,
+      );
       return;
     }
     this.textures.set(uniformName, texture);
@@ -267,9 +344,13 @@ class ShaderMount {
     Object.entries(updatedUniforms).forEach(([key, value]) => {
       let cacheValue = value;
       if (value instanceof HTMLImageElement) {
-        cacheValue = `${value.src.slice(0, 200)}|${value.naturalWidth}x${value.naturalHeight}`;
+        cacheValue = `${
+          value.src.slice(0, 200)
+        }|${value.naturalWidth}x${value.naturalHeight}`;
       }
-      if (this.areUniformValuesEqual(this.uniformCache[key], cacheValue)) return;
+      if (this.areUniformValuesEqual(this.uniformCache[key], cacheValue)) {
+        return;
+      }
       this.uniformCache[key] = cacheValue;
       const location = this.uniformLocations[key];
       if (!location) {
@@ -391,8 +472,14 @@ class ShaderMount {
       this.resizeObserver.disconnect();
       this.resizeObserver = null;
     }
-    visualViewport?.removeEventListener("resize", this.handleVisualViewportChange);
-    this.ownerDocument.removeEventListener("visibilitychange", this.handleDocumentVisibilityChange);
+    visualViewport?.removeEventListener(
+      "resize",
+      this.handleVisualViewportChange,
+    );
+    this.ownerDocument.removeEventListener(
+      "visibilitychange",
+      this.handleDocumentVisibilityChange,
+    );
     this.uniformLocations = {};
     this.canvasElement.remove();
     delete this.parentElement.paperShaderMount;
@@ -404,21 +491,39 @@ function createShader(gl, type, source) {
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    console.error("An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader));
+    console.error(
+      "An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader),
+    );
     gl.deleteShader(shader);
     return null;
   }
   return shader;
 }
 function createProgram(gl, vertexShaderSource2, fragmentShaderSource) {
-  const format = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.MEDIUM_FLOAT);
+  const format = gl.getShaderPrecisionFormat(
+    gl.FRAGMENT_SHADER,
+    gl.MEDIUM_FLOAT,
+  );
   const precision = format ? format.precision : null;
   if (precision && precision < 23) {
-    vertexShaderSource2 = vertexShaderSource2.replace(/precision\s+(lowp|mediump)\s+float;/g, "precision highp float;");
-    fragmentShaderSource = fragmentShaderSource.replace(/precision\s+(lowp|mediump)\s+float/g, "precision highp float").replace(/\b(uniform|varying|attribute)\s+(lowp|mediump)\s+(\w+)/g, "$1 highp $3");
+    vertexShaderSource2 = vertexShaderSource2.replace(
+      /precision\s+(lowp|mediump)\s+float;/g,
+      "precision highp float;",
+    );
+    fragmentShaderSource = fragmentShaderSource.replace(
+      /precision\s+(lowp|mediump)\s+float/g,
+      "precision highp float",
+    ).replace(
+      /\b(uniform|varying|attribute)\s+(lowp|mediump)\s+(\w+)/g,
+      "$1 highp $3",
+    );
   }
   const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource2);
-  const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+  const fragmentShader = createShader(
+    gl,
+    gl.FRAGMENT_SHADER,
+    fragmentShaderSource,
+  );
   if (!vertexShader || !fragmentShader) return null;
   const program = gl.createProgram();
   if (!program) return null;
@@ -426,7 +531,10 @@ function createProgram(gl, vertexShaderSource2, fragmentShaderSource) {
   gl.attachShader(program, fragmentShader);
   gl.linkProgram(program);
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error("Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
+    console.error(
+      "Unable to initialize the shader program: " +
+        gl.getProgramInfoLog(program),
+    );
     gl.deleteProgram(program);
     gl.deleteShader(vertexShader);
     gl.deleteShader(fragmentShader);
@@ -461,7 +569,8 @@ function isPaperShaderElement(element) {
 }
 function isSafari() {
   const ua = navigator.userAgent.toLowerCase();
-  return ua.includes("safari") && !ua.includes("chrome") && !ua.includes("android");
+  return ua.includes("safari") && !ua.includes("chrome") &&
+    !ua.includes("android");
 }
 function bestGuessBrowserZoom(doc) {
   const viewportScale = visualViewport?.scale ?? 1;
@@ -484,8 +593,5 @@ function bestGuessBrowserZoom(doc) {
   }
   return ratio;
 }
-export {
-  ShaderMount,
-  isPaperShaderElement
-};
+export { isPaperShaderElement, ShaderMount };
 //# sourceMappingURL=shader-mount.js.map

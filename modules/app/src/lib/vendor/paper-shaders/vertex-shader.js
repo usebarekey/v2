@@ -155,7 +155,5 @@ void main() {
   v_imageUV += .5;
   v_imageUV.y = 1. - v_imageUV.y;
 }`;
-export {
-  vertexShaderSource
-};
+export { vertexShaderSource };
 //# sourceMappingURL=vertex-shader.js.map
