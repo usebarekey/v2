@@ -34,26 +34,36 @@
             <div class="flex flex-col absolute inset-0 bg-linear-to-t from-card/50 to-card/40 backdrop-blur-xl overflow-hidden rounded-lg m-4">
 
                 <!-- navbar -->
-                <div class="flex flex-row gap-4 items-center">
-                    <div class="flex flex-row gap-1.5 p-4">
-                        <div class="size-2.5 rounded-full bg-green-500"></div>
-                        <div class="size-2.5 rounded-full bg-yellow-500"></div>
+                <div class="flex flex-row gap-4 items-end pt-3">
+                    <div class="flex flex-row gap-1.5 px-4 pb-2.5">
                         <div class="size-2.5 rounded-full bg-red-500"></div>
+                        <div class="size-2.5 rounded-full bg-yellow-500"></div>
+                        <div class="size-2.5 rounded-full bg-green-500"></div>
                     </div>
 
-                    {#snippet file(name: string, code: string)}
-                        <div class="">
-                            <div>
-
-                            </div>
-                        </div>
+                    {#snippet file(name: string, first: boolean, last: boolean)}
+                        <button
+                            onclick={() => current_key = "mixed"}
+                            class="relative text-sm bg-card rounded-t-lg min-w-36 text-center px-4 py-1.5"
+                        >
+                            {#if first}
+                                <span class="absolute bottom-0 -left-3 size-3 bg-[radial-gradient(circle_at_top_left,transparent_12px,var(--card)_12px)]"></span>
+                            {/if}
+                            {#if last}
+                                <span class="absolute bottom-0 -right-3 size-3 bg-[radial-gradient(circle_at_top_right,transparent_12px,var(--card)_12px)]"></span>
+                            {/if}
+                            {name}
+                        </button>
                     {/snippet}
 
-                    {@render file("barekey.ts", current.title)}
+                    <div class="flex flex-row">
+                        {@render file("barekey.ts", true, false)}
+                        {@render file("env.ts", false, true)}
+                    </div>
                 </div>
 
                 <!-- code -->
-                <div class="bg-card h-full px-3 py-2">
+                <div class="bg-card h-full px-3 py-6">
                     {@html yield* Highlight({ code: current.code, lang: "tsx" })}
                 </div>
             </div>
