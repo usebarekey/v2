@@ -594,4 +594,3 @@ function bestGuessBrowserZoom(doc) {
   return ratio;
 }
 export { isPaperShaderElement, ShaderMount };
-//# sourceMappingURL=shader-mount.js.map

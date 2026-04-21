@@ -701,4 +701,3 @@ export {
   POISSON_CONFIG_OPTIMIZED,
   toProcessedLiquidMetal,
 };
-//# sourceMappingURL=liquid-metal.js.map

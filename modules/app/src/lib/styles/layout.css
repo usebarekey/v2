@@ -4,6 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* base hue that drives the motion-core tokens; picked to match the existing palette (~286) */
+  --base-hue: 286;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
@@ -36,6 +39,41 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  /* motion-core tokens (light mode) */
+  --highlight: oklch(0.4224 0.0013 var(--base-hue));
+  --background-inset: oklch(0.9764 0.0013 var(--base-hue));
+  --background-muted: oklch(0.956 0.002 var(--base-hue));
+  --foreground-muted: oklch(0.5493 0.0081 var(--base-hue));
+  --accent-secondary: oklch(0.5096 0.151959 44.4414);
+  --white-fixed: oklch(1 0 0);
+
+  --shadow-xs: 0px 1px 1px -0.5px rgba(0, 0, 0, 0.06);
+  --shadow-sm:
+    0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    0px 3px 3px -1.5px rgba(0, 0, 0, 0.06);
+  --shadow-md:
+    0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+    0px 6px 6px -3px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+    0px 6px 6px -3px rgba(0, 0, 0, 0.06),
+    0px 12px 12px -6px rgba(0, 0, 0, 0.06);
+  --shadow-xl:
+    0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+    0px 6px 6px -3px rgba(0, 0, 0, 0.06),
+    0px 12px 12px -6px rgba(0, 0, 0, 0.06),
+    0px 24px 24px -12px rgba(0, 0, 0, 0.06);
+  --shadow-2xl:
+    0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+    0px 6px 6px -3px rgba(0, 0, 0, 0.06),
+    0px 12px 12px -6px rgba(0, 0, 0, 0.06),
+    0px 24px 24px -12px rgba(0, 0, 0, 0.06),
+    0px 48px 48px -24px rgba(0, 0, 0, 0.06);
 }
 
 .dark {
@@ -70,6 +108,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+
+  /* motion-core tokens (dark mode) */
+  --highlight: oklch(0.999 0.013 var(--base-hue));
+  --background-inset: oklch(0.2099 0.0039 var(--base-hue));
+  --background-muted: oklch(0.3017 0.0073 var(--base-hue));
+  --foreground-muted: oklch(0.669 0.0107 var(--base-hue));
+  --accent-secondary: oklch(0.5096 0.131959 44.4414);
 }
 
 @theme inline {
@@ -113,6 +158,21 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* motion-core tokens exposed as utilities */
+  --color-highlight: var(--highlight);
+  --color-background-inset: var(--background-inset);
+  --color-background-muted: var(--background-muted);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-white-fixed: var(--white-fixed);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 }
 
 @layer base {
@@ -201,5 +261,93 @@
 @utility text-trim {
   @supports (text-box: trim-both cap alphabetic) {
     text-box: trim-both cap alphabetic;
+  }
+}
+/* Figma squircle G2 path — smoothing=0.6, bezier→arc→bezier per corner
+ * p=1.6r, coefficients: 1.04r, 0.76r, 0.546r, 0.109r (from Figma blog)
+@utility rounded {
+  --r: var(--radius-md);
+  @apply border-shape-squircle;
+}
+@utility rounded-* {
+  --r: --value(--radius-*, [length], [*]);
+  @apply border-shape-squircle;
+}
+
+@utility border-shape-squircle {
+  border-shape: shape(
+    from calc(1.6 * var(--r)) 0,
+    hline to calc(100% - 1.6 * var(--r)),
+    curve to calc(100% - 0.546 * var(--r)) calc(0.109 * var(--r)) with calc(100% - 1.04 * var(--r))
+      0 / calc(100% - 0.76 * var(--r)) 0,
+    arc to calc(100% - 0.109 * var(--r)) calc(0.546 * var(--r)) of var(--r) cw,
+    curve to 100% calc(1.6 * var(--r)) with 100% calc(0.76 * var(--r)) / 100% calc(1.04 * var(--r)),
+    vline to calc(100% - 1.6 * var(--r)),
+    curve to calc(100% - 0.109 * var(--r)) calc(100% - 0.546 * var(--r)) with 100%
+      calc(100% - 1.04 * var(--r)) / 100% calc(100% - 0.76 * var(--r)),
+    arc to calc(100% - 0.546 * var(--r)) calc(100% - 0.109 * var(--r)) of var(--r) cw,
+    curve to calc(100% - 1.6 * var(--r)) 100% with calc(100% - 1.04 * var(--r)) 100% /
+      calc(100% - 0.76 * var(--r)) 100%,
+    hline to calc(1.6 * var(--r)),
+    curve to calc(0.546 * var(--r)) calc(100% - 0.109 * var(--r)) with calc(1.04 * var(--r)) 100% /
+      calc(0.76 * var(--r)) 100%,
+    arc to calc(0.109 * var(--r)) calc(100% - 0.546 * var(--r)) of var(--r) cw,
+    curve to 0 calc(100% - 1.6 * var(--r)) with 0 calc(100% - 0.76 * var(--r)) / 0
+      calc(100% - 1.04 * var(--r)),
+    vline to calc(1.6 * var(--r)),
+    curve to calc(0.109 * var(--r)) calc(0.546 * var(--r)) with 0 calc(1.04 * var(--r)) / 0
+      calc(0.76 * var(--r)),
+    arc to calc(0.546 * var(--r)) calc(0.109 * var(--r)) of var(--r) cw,
+    curve to calc(1.6 * var(--r)) 0 with calc(0.76 * var(--r)) 0 / calc(1.04 * var(--r)) 0
+  );
+}
+
+@utility border-shape-initial {
+  border-shape: none !important;
+  corner-shape: round !important;
+}
+
+/* Pills/capsules should stay truly round, and defining this as a utility also fixes `rounded-full!`.
+@utility rounded-full {
+  @apply border-shape-initial;
+}
+*/
+
+/* motion-core utilities */
+
+@utility card {
+  box-shadow:
+    0 -1px rgba(255, 255, 255, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    0 0 0 1px oklch(from var(--highlight) l c h / 10%),
+    0 1px 6px -4px #000;
+}
+
+@utility inset-shadow {
+  box-shadow:
+    inset 0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+    inset 0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+    inset 0px 6px 6px -3px rgba(0, 0, 0, 0.06),
+    inset 0 -1px rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px oklch(from var(--highlight) l c h / 10%);
+}
+
+@utility bg-dashed {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-border) 12.5%,
+    transparent 12.5%,
+    transparent 50%,
+    var(--color-border) 50%,
+    var(--color-border) 62.5%,
+    transparent 62.5%,
+    transparent 100%
+  );
+  background-size: 0.25rem 0.25rem;
+}
+
+@layer utilities {
+  .highlight {
+    box-shadow: 0 -1px rgba(255, 255, 255, 0.06);
   }
 }

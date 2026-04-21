@@ -41,6 +41,7 @@
                 >
                     <Icon class="size-25 text-border -rotate-12" />
                 </div>
+                
                 <div class="relative z-10 flex max-w-xs flex-col gap-4">
                     <div class="flex flex-col gap-0.5">
                         <span class="font-semibold">{title}</span>
@@ -58,7 +59,7 @@
                 </div>
             </div>
         {/snippet}
-
+        
         {@render bento(
             "bg-card",
             "Secrets",

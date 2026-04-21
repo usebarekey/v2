@@ -9,23 +9,23 @@ import Previous from "./pagination-previous.svelte";
 import Next from "./pagination-next.svelte";
 
 export {
-  Content,
-  Content as PaginationContent,
-  Ellipsis,
-  Ellipsis as PaginationEllipsis,
-  Item,
-  Item as PaginationItem,
-  Link,
-  Link as PaginationLink,
-  Next,
-  Next as PaginationNext,
-  NextButton, // old
-  NextButton as PaginationNextButton, // old
-  PrevButton, // old
-  PrevButton as PaginationPrevButton, // old
-  Previous,
-  Previous as PaginationPrevious,
-  Root,
-  //
-  Root as Pagination,
+	Root,
+	Content,
+	Item,
+	Link,
+	PrevButton, // old
+	NextButton, // old
+	Ellipsis,
+	Previous,
+	Next,
+	//
+	Root as Pagination,
+	Content as PaginationContent,
+	Item as PaginationItem,
+	Link as PaginationLink,
+	PrevButton as PaginationPrevButton, // old
+	NextButton as PaginationNextButton, // old
+	Ellipsis as PaginationEllipsis,
+	Previous as PaginationPrevious,
+	Next as PaginationNext,
 };
