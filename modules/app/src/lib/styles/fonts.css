@@ -109,3 +109,75 @@
 .font-sohne {
   font-family: "Sohne", sans-serif;
 }
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "APK Galeria";
+  src: url("../fonts/apk-galeria/extrabold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Berkeley Mono";
+  src: url("../fonts/berkeley-mono/regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-apk-galeria {
+  font-family: "APK Galeria", sans-serif;
+}
+
+.font-berkeley-mono {
+  font-family: "Berkeley Mono", ui-monospace, monospace;
+}

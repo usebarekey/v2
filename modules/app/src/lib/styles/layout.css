@@ -118,7 +118,7 @@
 }
 
 @theme inline {
-  --font-sans: "Sohne", sans-serif;
+  --font-sans: "APK Galeria", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -178,6 +178,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply transition-colors duration-150;
   }
 
   body {
@@ -186,6 +187,14 @@
 
   html {
     @apply font-sans;
+  }
+
+  button {
+    cursor: pointer;
+    
+    &:is([disabled]) {
+      cursor: not-allowed;
+    }
   }
 }
 
@@ -264,8 +273,8 @@
   }
 }
 /* Figma squircle G2 path — smoothing=0.6, bezier→arc→bezier per corner
- * p=1.6r, coefficients: 1.04r, 0.76r, 0.546r, 0.109r (from Figma blog)
-@utility rounded {
+ * p=1.6r, coefficients: 1.04r, 0.76r, 0.546r, 0.109r (from Figma blog) */
+ @utility rounded {
   --r: var(--radius-md);
   @apply border-shape-squircle;
 }
@@ -307,11 +316,10 @@
   corner-shape: round !important;
 }
 
-/* Pills/capsules should stay truly round, and defining this as a utility also fixes `rounded-full!`.
+/* Pills/capsules should stay truly round, and defining this as a utility also fixes `rounded-full!`. */
 @utility rounded-full {
   @apply border-shape-initial;
 }
-*/
 
 /* motion-core utilities */
 
