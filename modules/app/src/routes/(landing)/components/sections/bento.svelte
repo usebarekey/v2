@@ -20,7 +20,7 @@
         >
 
         <span class="text-muted-foreground">
-            Focus on whats important — your app, and let Barekey handle the
+            Focus on whats important - your app, and let Barekey handle the
             boring stuff.
         </span>
     </div>
@@ -41,7 +41,7 @@
                 >
                     <Icon class="size-25 text-border -rotate-12" />
                 </div>
-                
+
                 <div class="relative z-10 flex max-w-xs flex-col gap-4">
                     <div class="flex flex-col gap-0.5">
                         <span class="font-semibold">{title}</span>
@@ -50,8 +50,8 @@
                         >
                     </div>
                     <a
-                        href="#"
-                        class="text-sm bg-linear-to-r from-accent to-emerald-500 text-transparent bg-clip-text font-medium inline-flex items-center gap-1"
+                        href="/docs"
+                        class="inline-flex items-center gap-1 bg-linear-to-r from-primary to-emerald-500 bg-clip-text text-sm font-medium text-transparent"
                     >
                         {link}
                         <IconChevronRight class="size-4 text-emerald-500" />
@@ -59,7 +59,7 @@
                 </div>
             </div>
         {/snippet}
-        
+
         {@render bento(
             "bg-card",
             "Secrets",

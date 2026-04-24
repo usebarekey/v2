@@ -5,6 +5,7 @@
     "npm:@fontsource/jetbrains-mono@5.2.8": "5.2.8",
     "npm:@internationalized/date@3.12.0": "3.12.0",
     "npm:@lucide/svelte@0.577.0": "0.577.0_svelte@5.54.0__acorn@8.16.0",
+    "npm:@motion-core/cli@*": "0.6.1",
     "npm:@sveltejs/adapter-vercel@6.3.1": "6.3.1_@sveltejs+kit@2.50.2__@sveltejs+vite-plugin-svelte@6.2.4___svelte@5.54.0____acorn@8.16.0___vite@7.3.1____picomatch@4.0.4__svelte@5.54.0___acorn@8.16.0__typescript@5.9.3__vite@7.3.1___picomatch@4.0.4__acorn@8.16.0_@sveltejs+vite-plugin-svelte@6.2.4__svelte@5.54.0___acorn@8.16.0__vite@7.3.1___picomatch@4.0.4_svelte@5.54.0__acorn@8.16.0_typescript@5.9.3_vite@7.3.1__picomatch@4.0.4",
     "npm:@sveltejs/kit@*": "2.50.2_@sveltejs+vite-plugin-svelte@6.2.4__svelte@5.54.0___acorn@8.16.0__vite@7.3.1___picomatch@4.0.4_svelte@5.54.0__acorn@8.16.0_typescript@5.9.3_vite@7.3.1__picomatch@4.0.4_acorn@8.16.0",
     "npm:@sveltejs/kit@2.50.2": "2.50.2_@sveltejs+vite-plugin-svelte@6.2.4__svelte@5.54.0___acorn@8.16.0__vite@7.3.1___picomatch@4.0.4_svelte@5.54.0__acorn@8.16.0_typescript@5.9.3_vite@7.3.1__picomatch@4.0.4_acorn@8.16.0",
@@ -470,6 +471,10 @@
         "semver",
         "tar"
       ],
+      "bin": true
+    },
+    "@motion-core/cli@0.6.1": {
+      "integrity": "sha512-amv5McoBm5RdVfEyjpO3aI/T+EMHmfV6H4KP4Dd0BknAZkxFgjgTaid9N1cvswHIB648I66J/2baJMNR9gfhpg==",
       "bin": true
     },
     "@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3": {

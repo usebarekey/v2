@@ -10,16 +10,16 @@
     >
         <div class="inline-flex max-w-full min-w-0 flex-col items-start gap-0">
             <span
-                class="text-trim w-fit whitespace-nowrap py-16 text-left leading-[0.88] text-[clamp(2.5rem,23cqi,18rem)] font-semibold bg-linear-to-tr from-accent to-accent-foreground text-transparent bg-clip-text"
+                class="text-trim w-fit whitespace-nowrap py-16 text-left leading-[0.88] text-[clamp(2.5rem,23cqi,18rem)] font-semibold bg-linear-to-tr from-primary to-emerald-500 text-transparent bg-clip-text"
                 >Barekey</span
             >
 
-            <div class="flex flex-row justify-between w-full">
+            <div class="flex w-full flex-row justify-between">
                 <div class="flex flex-row items-start gap-16">
                     {#snippet link(text: string, href: string)}
                         <a
                             {href}
-                            class="text-sm text-muted-foreground hover:text-accent"
+                            class="text-sm text-muted-foreground hover:text-primary"
                             >{text}</a
                         >
                     {/snippet}
@@ -58,23 +58,25 @@
                         </div>
                     </div>
 
-                                        <div class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-2">
                         <span class="text-sm font-medium font-kh-interference"
                             >Open Source</span
                         >
                         <div class="flex flex-col gap-1">
-                            {@render link("svelte-effect-runtime", "https://github.com/usebarekey/svelte-effect-runtime")}
+                            {@render link(
+                                "svelte-effect-runtime",
+                                "https://github.com/usebarekey/svelte-effect-runtime",
+                            )}
                         </div>
                     </div>
                 </div>
 
                 <div class="flex items-end justify-end">
-                    <a
-                        href="#"
-                        class="text-sm hover:bg-green-500/10 px-2 py-1 rounded-md font-kh-interference text-green-500"
+                    <span
+                        class="rounded-md px-2 py-1 text-sm font-kh-interference text-green-500"
                     >
-                        • All systems normal.
-                    </a>
+                        All systems normal.
+                    </span>
                 </div>
             </div>
         </div>

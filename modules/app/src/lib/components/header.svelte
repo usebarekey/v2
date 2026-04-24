@@ -20,13 +20,13 @@
 
         <nav class="inline-flex min-w-0 items-center justify-center gap-4">
             <a
-                href="#"
-                class="text-sm text-foreground transition-all duration-200 hover:text-accent"
+                href="/pricing"
+                class="text-sm text-foreground transition-all duration-200 hover:text-primary"
                 >Pricing</a
             >
             <a
-                href="#"
-                class="text-sm text-foreground transition-all duration-200 hover:text-accent"
+                href="/docs"
+                class="text-sm text-foreground transition-all duration-200 hover:text-primary"
                 >Docs</a
             >
 
@@ -34,10 +34,10 @@
 
             <div class="flex flex-row items-center gap-2">
                 <TwitterIcon
-                    class="text-foreground transition-all duration-200 hover:text-accent"
+                    class="text-foreground transition-all duration-200 hover:text-primary"
                 />
                 <GithubIcon
-                    class="text-foreground transition-all duration-200 hover:text-accent"
+                    class="text-foreground transition-all duration-200 hover:text-primary"
                 />
             </div>
 
